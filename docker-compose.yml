@@ -1,0 +1,22 @@
+version: '3.0'
+
+services: 
+    webapp:
+        stdin_open: true
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        ports: 
+            - "3000:3000"
+        volumes: 
+            - /usr/webapp/node_modules
+            - .:/usr/webapp
+    test:
+        stdin_open: true
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes: 
+            - /usr/webapp/node_modules
+            - .:/usr/webapp
+        command: ["npm", "run", "test"]
